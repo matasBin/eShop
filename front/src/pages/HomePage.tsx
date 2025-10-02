@@ -1,11 +1,14 @@
 import React, {useEffect} from 'react';
-import {productStore} from "../store/allStatesStore";
+import {filteredProductStore, productStore} from "../store/allStatesStore";
 import ProductCard from "../components/ProductCard";
 
 const HomePage = () => {
 
     const productsArray = productStore((state) => state.productsArray)
     const setProductsArray = productStore((state) => state.setProducts)
+
+    const filteredProducts = filteredProductStore((state) => state.filteredProductsArray)
+    const setFilteredProducts = filteredProductStore((state) => state.setFilteredProductsArray)
 
     useEffect(() => {
         async function fetchProducts() {
@@ -14,6 +17,7 @@ const HomePage = () => {
                 const data = await res.json()
                 console.log(data)
                 setProductsArray(data)
+                setFilteredProducts(data)
             } catch (e) {
                 console.log(e)
 
@@ -26,8 +30,8 @@ const HomePage = () => {
         <div className={"HomePage"}>
 
             {
-                productsArray &&
-                productsArray.map((item, index) =>
+                filteredProducts &&
+                filteredProducts.map((item, index) =>
                 <ProductCard key={index} item={item}/>
                 )
             }

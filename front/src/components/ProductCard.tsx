@@ -1,6 +1,7 @@
 import React from 'react';
 import {Product} from "../types/product";
 import {Link} from "react-router-dom";
+import {cartStore} from "../store/allStatesStore";
 
 type ProductCardProps = {
     item: Product
@@ -8,13 +9,24 @@ type ProductCardProps = {
 
 const ProductCard = ({item}: ProductCardProps) => {
 
+    const cart = cartStore((state) => state.cart)
+    const setCart = cartStore((state) => state.setCart)
+
+    /*Adds the product to cart*/
+    function addToCart() {
+        if(item) {
+            setCart([...cart, item])
+        }
+    }
+
     return (
         <div className={"ProductCard"}>
-            <Link to={`/product/${item.id}`}>
                 <div className="card">
                     <div className="card__shine"></div>
                     <div className="card__glow"></div>
                     <div className="card__content">
+
+                        <Link to={`/product/${item.id}`}>
                         <div className="card__badge">NEW</div>
                         <div style={{backgroundColor: "#a78bfa"}} className="card__image">
                             <img src={item.image} alt=""/>
@@ -23,12 +35,14 @@ const ProductCard = ({item}: ProductCardProps) => {
                             <p className="card__title">{item.title}</p>
                             <p className="card__description">{item.description}</p>
                         </div>
+                        </Link>
+
                         <div className="card__footer">
                             <div className="card__price">{item.price}$</div>
-                            <div className="card__button">
+                            <div className="card__button" onClick={addToCart}>
                                 <svg height="16" width="16" viewBox="0 0 24 24">
                                     <path
-                                        stroke-width="2"
+                                        strokeWidth="2"
                                         stroke="currentColor"
                                         d="M4 12H20M12 4V20"
                                         fill="currentColor"
@@ -38,9 +52,6 @@ const ProductCard = ({item}: ProductCardProps) => {
                         </div>
                     </div>
                 </div>
-            </Link>
-
-
         </div>
     );
 };

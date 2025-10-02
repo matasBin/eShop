@@ -19,15 +19,20 @@
     padding: 10px;
     border: 1px solid black;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
-.cart {
+.cartImg {
     display: flex;
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
     height: 50px;
     width: 50px;
+}
+
+.cart {
+    position: relative;
 }
 
 /* Product card*/
@@ -277,21 +282,95 @@
 .SingleProductPage {
     display: flex;
     width: 70vw;
+    height: 70vh;
     margin: auto;
-    gap: 10px;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .SingleProductPage .imageBox {
     display: flex;
     flex: 1;
     border: 1px solid black;
-    padding: 10px;
+    padding: 15px;
     justify-content: center;
-
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
 }
 
 .SingleProductPage .productInfo {
     display: flex;
     flex: 1;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.cartCount {
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background: red;
+    top: -10px;
+    right: -10px;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.CategoryHover {
+    position: relative; /* This is crucial for absolute positioning context */
+    display: inline-block; /* Only takes up needed space */
+}
+
+.CategoryHover:hover .selection {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible; /* Better than pointer-events for layout */
+}
+
+.selection {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+    visibility: hidden; /* Completely removes from layout when hidden */
+
+    /* Absolute positioning - key for not stretching the parent */
+    position: absolute;
+    top: 100%; /* Positions directly below the parent */
+    left: 0;
+
+    /* Styling for the dropdown box */
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 1rem;
+    min-width: 200px;
+    z-index: 1000; /* Ensures it appears above other content */
+}
+
+.categoryBox {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background: #f0f0f0;
+    border-radius: 4px;
+    display: inline-block; /* Only takes needed space */
+}
+
+/* Optional: Style the menu items */
+.selection h4 {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.selection h4:hover {
+    background-color: #f5f5f5;
 }

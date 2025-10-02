@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import SingleProductPage from "./pages/SingleProductPage";
 import CartPage from "./pages/CartPage";
+import CategoryHover from "./components/CategoryHover";
 
 function App() {
     return (
@@ -12,7 +13,7 @@ function App() {
             <BrowserRouter>
 
                 <NavBar />
-
+                <CategoryHover></CategoryHover>
                 <Routes>
 
                     <Route path={"/"} element={<HomePage/>}></Route>
