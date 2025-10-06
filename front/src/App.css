@@ -323,6 +323,12 @@
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+.showCart {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+
 .CategoryHover {
     position: relative; /* This is crucial for absolute positioning context */
     display: inline-block; /* Only takes up needed space */
